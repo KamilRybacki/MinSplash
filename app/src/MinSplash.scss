@@ -1,6 +1,11 @@
 @import './theme';
 
+@mixin standard_shadow {
+  box-shadow: 5px 5px 5px $manatee;
+}
+
 html {
+  font-family: $body-font;
   font-size: $root-font-size;
   background-color: $alice-blue;
 }
@@ -12,45 +17,56 @@ html {
   display: grid;
   grid-template-areas: 
   "title menu" 
-  "navbar navbar"
   "viewer viewer"
   "footnote footnote";
 
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 1fr 3fr 1fr;
+  grid-template-rows: 1fr 3fr;
 
-  margin: 0.5rem;
+  padding: 1rem;
 
   &__main-header {
 
+    @include lazy_center;
+
+    grid-area: title;
+
+    height: 100%;
+
     position: relative;
-    
+
     display: flex;
     align-items: center;
       
-    border: 2px solid $space-cadet;
-
-    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
-
-    padding-left: 1rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
-
-    background-color: $space-cadet;
     color: $alice-blue;
 
     &__title-wrapper {
     
-      grid-area: title;
+      @include lazy_center;
+      
+      height: 100%;
+
       display: flex;
       flex-direction: column;
 
+      @include standard_shadow;
+
+      background-color: $space-cadet;
+
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+
       &__title {
+
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 1rem;
 
         margin: 0;
 
         font-family: $main-heading-font;
         font-size: $main-heading-font-size;
+        font-weight: bolder;
 
         text-decoration: underline;
 
@@ -58,12 +74,14 @@ html {
 
       &__subtitle {
 
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-bottom: 1rem;
+
         margin: 0;
 
-        width: 60%;
-
         font-family: $body-font;
-        font-size: $body-font-size;
+        font-size: $footnote-font-size;
 
         font-weight: 300;
         font-style: italic;
@@ -71,10 +89,68 @@ html {
       }
     }
 
-    &__
+    #main-menu-button {
+
+      position: relative;
+
+      height: 100%;
+
+      @include standard_shadow;
+
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-around;
+      align-items: center;
+
+      background-color: $space-cadet;
+
+      margin-left: 1px;
+
+      height: 100%;
+      width: 2rem;
+
+      border: none;
+
+      transition: 0.5s ease-in-out;
+
+      &:hover {
+
+        transform: translateX(5px);
+        transition: 0.5s ease-in-out;
+
+      }
+
+      .menu-button-triangle {
+
+        background-color: lighten($color: $space-cadet, $amount: 50);
+
+        width: 30%;
+        height: 10%;
+
+        clip-path: polygon(0 0, 100% 50%, 0% 100%);
+
+      }
+
+      #menu-button-text {
+
+        color: lighten($color: $space-cadet, $amount: 50);
+
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+
+        font-size: $footnote-font-size;
+        font-weight: bold;
+
+      }
+
+    }
 
   }
-  
+
   &__general-menu {
 
     @include lazy_center;
@@ -84,4 +160,104 @@ html {
     grid-area: menu;
 
   }
+
+  #Browser__wrapper {
+   
+    margin-top: 1rem;
+    max-width: 75rem;
+
+    grid-area: viewer;
+    
+
+    .title-bar-wrapper {
+
+      background-color: $manatee;
+      box-shadow: inset 1px 1px 5px darken($color: $manatee, $amount: 10);
+
+      .title-bar-text {
+
+        color: black;
+
+      }
+
+      .title-bar-button-wrapper {
+
+        .title-bar-button {
+
+          width: 0.5rem;
+          height: 0.75rem;
+
+        }
+
+        .title-bar-minimize {
+
+          background-color: yellow;
+          
+        }
+
+        .title-bar-maximize {
+          
+          background-color: green;
+          
+        }
+
+        .title-bar-close {
+
+          background-color: red;
+          
+        }
+
+      }
+
+    }
+
+    #Browser__window {
+
+      display: block;
+
+      overflow: auto;
+
+      grid-template-rows: 80% 20%;
+      grid-template-columns: 30% 70%;
+
+      background-color: $space-cadet;
+      @include standard_shadow;
+
+      color: $alice-blue;
+      font-size: $body-font-size;
+
+    }
+
+    #categories-browser {
+
+      display: flex;
+
+      #categories-list {
+        width: 30%;
+      }
+
+      #category-preview {
+        width: 70%;
+      }
+
+    }
+
+    #command-line {
+
+      width: 100%;
+
+      border: none;
+      background: none;
+
+      font-size: $footnote-font-size;
+      color: lighten($color: $space-cadet, $amount: 20);
+
+      &:focus, &:active {
+        outline: none;
+      }
+
+    }
+
+  }
+
 }

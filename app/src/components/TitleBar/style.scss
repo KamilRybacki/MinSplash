@@ -1,0 +1,57 @@
+$buttons-wrapper-width: 50px;
+
+.title-bar-wrapper {
+
+	display: flex;
+
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0.25rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+	
+	.title-bar-text {
+
+		font-weight: bolder;
+		font-size: smaller;
+		
+		width: 100%;
+		text-align: center;
+
+	}
+
+	.title-bar-button-wrapper {
+
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		width: $buttons-wrapper-width;
+
+		.title-bar-button {
+
+			background: none;
+			border: none;
+			border-radius: 50%;
+
+		}
+
+		.title-bar-minimize {
+			
+		}
+
+		.title-bar-maximize {
+			
+		}
+
+		.title-bar-close {
+			
+		}
+
+	}
+
+}
