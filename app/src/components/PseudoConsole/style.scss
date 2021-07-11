@@ -1,0 +1,48 @@
+
+.terminal {
+
+	width: 100%;
+
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	font-size: smaller;
+
+	display: flex;
+	flex-direction: column;
+
+	border: none;
+	background: none;
+
+	& > span {
+		width: 100%;
+	}
+
+	& > section {
+
+		display: flex;
+
+		align-items: center;
+
+		flex-direction: row;
+
+		& > input {
+
+			border: none;
+			background: none;
+			width: 100%;
+
+			&:focus, &:active {
+				outline: none;
+			}
+
+		}
+
+		& > p {
+			width: 1rem;
+		}
+
+	}
+
+
+}

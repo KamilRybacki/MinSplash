@@ -1,21 +1,16 @@
-const footnote_style = {
+import './style.scss'
 
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+const MY_WEBPAGE_LINK = "https://github.com/KamilRybacki";
 
-  position: "fixed",
-  bottom: "0",
-
-  width: "100%",
-
-  fontSize: "50%"
-
-}
 
 function AppFooter({title}) {
   return (
-    <span style={footnote_style}>{title} | by Kamil Rybacki 2021</span>  
+    <span id="app-footnote-wrapper">
+    <pre id="app-footnote-title">{title} </pre>
+    <pre> | by  </pre> 
+    <a href={MY_WEBPAGE_LINK} id="app-footnote-link">Kamil Rybacki</a> 
+    <pre>  (2021)</pre>
+    </span>  
   )
 }
 

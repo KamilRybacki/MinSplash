@@ -1,0 +1,39 @@
+#app-footnote-wrapper {
+  
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: fixed;
+	bottom: 1px;
+
+	width: 100%;
+
+	font-size: 50%;
+
+	color: black;
+
+}
+
+#app-footnote-wrapper > pre {
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+#app-footnote-title {
+
+	font-size: 125%;
+	font-weight: bold;
+
+}
+
+#app-footnote-link {
+
+	font-weight: bolder; 
+	letter-spacing: 1px;
+
+}
+
