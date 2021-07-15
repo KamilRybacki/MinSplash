@@ -15,7 +15,7 @@ export const unsplashFetch = (path) => {
 	return function (link_params) {
 
 		let fetch_link = `${UNSPLASH_BASE_PATH}/${path}` 
-		if (link_params !== ""){
+		if (link_params){
 			fetch_link += `${link_params}`;
 		}
 		

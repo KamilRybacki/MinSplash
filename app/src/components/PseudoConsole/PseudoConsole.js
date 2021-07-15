@@ -59,7 +59,12 @@ class PseudoConsole extends Component {
 			<div id={this.state.console_id} className="terminal">
 				<span id={`${this.state.console_id}__output`}>{
 					this.state.history.map( (command, index) => {
-						return <p key={`terminal_output_${index + 1}`}>{command}</p>
+
+						const command_typing_steps = 5 * command.length;
+						const command_typing_time = command.length * 0.1;
+
+						return <p key={`terminal_output_${index + 1}`} style={{ animation: `typing ${command_typing_time}s steps(${command_typing_steps}, end)` }}>{command}</p>
+
 					}) 
 				}</span>	
 				<section><p>></p><input type="text" id={`${this.state.console_id}__input`} onKeyDown={ (e) => e.key === "Enter" ? this.pushToHistory(this.state.text_field.value) : {} } autoComplete="off"/></section>

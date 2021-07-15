@@ -1,5 +1,4 @@
 @import './theme';
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;600&display=swap');
 
 @mixin standard_shadow {
   box-shadow: 5px 5px 5px $manatee;
@@ -22,7 +21,7 @@ html {
   "footnote footnote";
 
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 3fr;
+  grid-template-rows: 100px auto;
 
   padding: 1rem;
 
@@ -31,8 +30,6 @@ html {
     @include lazy_center;
 
     grid-area: title;
-
-    height: 100%;
 
     position: relative;
 
@@ -164,61 +161,9 @@ html {
 
   #Browser__wrapper {
    
-    margin-top: 1rem;
-    max-width: 75rem;
-
     grid-area: viewer;
     
-    .title-bar-wrapper {
-
-      background-color: $manatee;
-      box-shadow: inset 1px 1px 5px darken($color: $manatee, $amount: 10);
-
-      .title-bar-text {
-
-        color: black;
-
-      }
-
-      .title-bar-button-wrapper {
-
-        .title-bar-button {
-
-          width: 0.5rem;
-          height: 0.75rem;
-
-        }
-
-        .title-bar-minimize {
-
-          background-color: yellow;
-          
-        }
-
-        .title-bar-maximize {
-          
-          background-color: green;
-          
-        }
-
-        .title-bar-close {
-
-          background-color: red;
-          
-        }
-
-      }
-
-    }
-
     #Browser__window {
-
-      font-family: 'Inconsolata';
-      font-weight: bolder;
-
-      display: block;
-
-      overflow: auto;
 
       grid-template-rows: 80% 20%;
       grid-template-columns: 30% 70%;
@@ -227,18 +172,19 @@ html {
       @include standard_shadow;
 
       color: $alice-blue;
-      font-size: $body-font-size;
 
     }
 
     #categories-browser {
+
+      position: relative;
 
       margin-bottom: 10px;
       margin-top: 5px;
 
       display: flex;
 
-      #categories-list {
+      #categories-list-wrapper {
 
         display: flex;
         flex-direction: column;
@@ -247,31 +193,217 @@ html {
 
         padding-right: 5px;
 
-        & > div {
+        #categories-title {
 
-          & > img {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
 
-            width: 10px;
-            height: 10px;
+          margin-bottom: 5px;
+
+          & > span {
+
+            order: 2;
+            margin-left: 5px;
 
           }
 
-          & > button {
+          & > img {
 
-            color: $alice-blue;
-
-            font-family: 'Inconsolata';
-            font-weight: bolder;
-            
-            text-align: left;
-
-            background: none;
-            border: none;
+            order: 1;
+            width: 15px;
+            height: 15px;
+            filter: invert(100%) sepia(40%) saturate(2599%) hue-rotate(178deg) brightness(101%) contrast(111%);
 
           }
 
         }
 
+        #categories-list {
+        
+          @include noselect;
+
+          position: relative;
+          left: 1rem;
+
+          display: flex;
+          flex-direction: column;
+
+          list-style: none;
+
+          
+          & > li {
+
+            position: relative;
+
+            &:before {
+              position: absolute;
+              top: 50%;
+              left: -0.5rem;
+              width: 0.25rem;
+              height: 1px;
+              margin: auto;
+              content: '';
+              background-color: $alice-blue;
+            }
+            
+            &:after {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: -0.75rem;
+              width: 1px;
+              height: 100%;
+              content: '';
+              background-color: $alice-blue;
+            }
+
+            & > a {
+
+              & > img {
+
+                width: 1rem;
+                height: 1rem;
+
+                margin-right: 5px;
+
+                filter: invert(100%) sepia(40%) saturate(2599%) hue-rotate(178deg) brightness(101%) contrast(111%);
+
+                cursor: pointer;
+
+              }
+
+              color: $alice-blue;
+
+              font-family: "Inconsolata";
+              font-size: 90%;
+              font-weight: 500;
+
+              text-align: left;
+
+              margin-left: 5px;
+
+              background: none;
+              border: none;
+              
+              text-decoration: none;
+
+            }
+
+          }
+
+          .view-change-button-enabled {
+
+            margin-top: 15px;
+
+            & > button {
+
+              background: none;
+            
+              cursor: pointer;
+
+              color: $alice-blue;
+
+              font-family: "Inconsolata";
+              font-size: 90%;
+              font-weight: 500;
+              
+              text-align: left;
+
+              margin-left: 5px;
+
+              background-color: lighten($color: $space-cadet, $amount: 20);
+
+              padding: 0.25rem;
+              border: 3px dotted $alice-blue;
+
+              &:hover {
+
+                background-color: lighten($color: $space-cadet, $amount: 40);
+
+              }
+              
+            }
+
+            &:before {
+
+              position: absolute;
+              top: 50%;
+              left: -0.75rem;
+              width: 0.5rem;
+              height: 1px;
+              margin: auto;
+              content: '';
+              background-color: $alice-blue;
+
+            }
+            
+            &:after {
+
+              position: absolute;
+              top: -100%;
+              left: -0.75rem;
+              width: 1px;
+              height: 150%;
+              content: '';
+              background-color: $alice-blue;
+
+            }
+          }
+        
+          .view-change-button-disabled {
+
+            margin-top: 15px;
+
+            & > button {
+
+              background: none;
+
+              color: $alice-blue;
+
+              font-family: "Inconsolata";
+              font-size: 90%;
+              font-weight: 500;
+              
+              text-align: left;
+
+              margin-left: 5px;
+
+              background-color: gray;
+
+              padding: 0.25rem;
+              border: 3px dotted $alice-blue;
+
+              cursor: not-allowed;
+              
+            }
+
+            &:before {
+
+              position: absolute;
+              top: 50%;
+              left: -0.75rem;
+              width: 0.5rem;
+              height: 1px;
+              margin: auto;
+              content: '';
+              background-color: $alice-blue;
+
+            }
+            
+            &:after {
+
+              position: absolute;
+              top: -100%;
+              left: -0.75rem;
+              width: 1px;
+              height: 150%;
+              content: '';
+              background-color: $alice-blue;
+
+            }
+          }
+        }
       }
 
       #category-preview {
@@ -287,13 +419,30 @@ html {
 
       font-weight: 300;
 
+      & > span {
+
+        & > p {
+
+          overflow: hidden;
+          white-space: nowrap;
+
+          margin: 0;
+
+        }
+
+      }
+
+      @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+      }
+
       & > section > input {
 
         color: aliceblue;
         font-family: 'Inconsolata';
 
       }
-
     }
   }
 }
