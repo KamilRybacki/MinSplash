@@ -29,8 +29,6 @@ function CollectionPreview() {
 
 	function fetchCollectionPhotos () {
 
-		console.log(collection_photos)
-
 		if ( collection_page === 1 ){
 
 			setCollectionPhotos([]);

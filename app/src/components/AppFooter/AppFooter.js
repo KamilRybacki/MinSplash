@@ -4,8 +4,6 @@ const MY_WEBPAGE_LINK = "https://github.com/KamilRybacki";
 
 const app_body_font = document.querySelector(`html`).style.fontFamily;
 
-console.log(app_body_font)
-
 const AppFootnoteWrapper = styled.div`
 
   display: flex;
