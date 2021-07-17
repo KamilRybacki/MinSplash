@@ -29,7 +29,7 @@ function ListEntry({collection_id, collection_title, ...rest}) {
 
 	return(
 		<>
-			<Link to={ !pressed ? `/${collection_id}` : "/" } className="list_entry_link" onClick={ () => { setPressed(!pressed) } }>
+			<Link to={ !pressed ? `/MinSplash/${collection_id}` : "/" } className="list_entry_link" onClick={ () => { setPressed(!pressed) } }>
 				<img {...DEFAULT_ICON_PROPS} src={ pressed ? OPEN_FOLDER_SRC : CLOSED_FOLDER_SRC } />
 				{collection_title}
 			</Link  >
