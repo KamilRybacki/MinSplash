@@ -101,10 +101,10 @@ export function MinSplashBrowser() {
 					</nav>
 					<article id="category-preview">
 					<Switch>
-						<Route exact path="/MinSplash/">
+						<Route exact path="/">
 						<h1>Welcome to MinSplash!</h1>
 						</Route>
-						<Route exact path="/MinSplash/:collectionId">
+						<Route exact path="/:collectionId">
 						{ collection_to_preview ?  
 							<CollectionPreview key={`${collection_to_preview.id}_${Date.now()}`}/> 
 							: 

@@ -186,7 +186,7 @@ function PhotoView ({console_ref}) {
 							<RedditShareButton url={photo_link}><RedditIcon/></RedditShareButton>
 							<PinterestShareButton url={photo_link}><PinterestIcon/></PinterestShareButton>
 						</div>
-						<Link to={`/MinSplash/${collection_id}`}><ReturnButton>Return to collection</ReturnButton></Link>			
+						<Link to={`/${collection_id}`}><ReturnButton>Return to collection</ReturnButton></Link>			
 					</PhotoMenu>
 				</nav>
 				<PhotoWindow>

@@ -47,7 +47,7 @@ function CollectionMiniature ({photo_data, collection_id, children}){
 		
 		const photo_id = photo_data.id 
 
-		setImageLink(`/MinSplash/${collection_id}/${photo_id}`);
+		setImageLink(`/${collection_id}/${photo_id}`);
 
 	},[])	
 
