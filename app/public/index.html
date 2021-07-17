@@ -25,10 +25,9 @@
     -->
     <title>MinSplash</title>
     <script>
-      if (sessionStorage.getItem('beenhere') ==='1') {
-          window.location="http://kamilrybacki.github.io/MinSplash";
-      }
-      sessionStorage.setItem('beenhere', '1');
+      window.onbeforeunload = function(e) {
+        location.href = 'https://kamilrybacki.github.io/MinSplash/';
+      };
       </script>
   </head>
   <body>
