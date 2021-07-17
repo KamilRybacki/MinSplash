@@ -1,5 +1,6 @@
-import { useContext, useState, useEffect, useRef, createContext } from "react";
+import { useState, useEffect, useRef, createContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import styled from "styled-components"
 
 import { unsplashFetch } from "../../utils/unsplash_api";
 
@@ -81,7 +82,7 @@ export function MinSplashBrowser() {
 
 	return (
 		<MinSplashBrowserWrapper>
-			<Terminal title="Browser">
+			<Terminal title="Browser" id="main-terminal">
 				<section id="categories-browser">
 					<nav id='categories-list-wrapper'>
 					<div id="categories-title">

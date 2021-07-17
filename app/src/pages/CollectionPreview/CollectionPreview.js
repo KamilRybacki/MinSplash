@@ -31,7 +31,7 @@ function CollectionPreview() {
 
 		console.log(collection_photos)
 
-		if ( collection_page == 1 ){
+		if ( collection_page === 1 ){
 
 			setCollectionPhotos([]);
 
@@ -61,7 +61,7 @@ function CollectionPreview() {
 
 	}
 
-	useEffect( () => { fetchCollectionPhotos(); }, [])
+	useEffect( () => { fetchCollectionPhotos(); console.log(collection_photos) }, [])
 
 	return (
 		<div className="collection_preview_wrapper">
@@ -95,7 +95,7 @@ function CollectionPreview() {
 					overflowX: 'none'
 
 				}} id="infinite-collection-view">
-					{collection_photos}
+					{collection_photos || "Loading..."}
 				</section>	
 				<button 
 					onClick={ () => { fetchCollectionPhotos() } } 

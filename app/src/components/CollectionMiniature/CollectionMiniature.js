@@ -45,8 +45,7 @@ function CollectionMiniature ({photo_data, collection_id, children}){
 
 	useEffect( () => {
 		
-		const base_raw_path = photo_data.urls.raw.split("?")[0]
-		const photo_id = base_raw_path.split("/").slice(-1)[0] 
+		const photo_id = photo_data.id 
 
 		setImageLink(`/${collection_id}/${photo_id}`);
 

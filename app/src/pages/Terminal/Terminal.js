@@ -3,6 +3,9 @@ import TitleBar from '../../components/TitleBar'
 
 import styled from 'styled-components';
 
+const TERMINAL_BACKGROUND = "hsl(235, 21%, 21%)"; 
+const TERMINAL_TEXT_COLOR = "rgba(237, 242, 244, 1)";
+
 const TerminalWrapper = styled.div`
 
 	margin-top: 1rem;
@@ -14,6 +17,9 @@ const TerminalWrapper = styled.div`
 `;
 
 const TerminalBrowserWindow = styled.div`
+
+	background-color: ${TERMINAL_BACKGROUND};
+	color: ${TERMINAL_TEXT_COLOR};
 
 	display: block;
 	overflow: auto;
@@ -28,7 +34,7 @@ const TerminalBrowserWindow = styled.div`
 
 `
 
-function Terminal ({title, children}) {
+function Terminal ({title, children, style}) {
 
 	useEffect( () => {
 
@@ -41,7 +47,7 @@ function Terminal ({title, children}) {
 	}, [])
 
 	return(
-		<TerminalWrapper id={`${title}__wrapper`}> 
+		<TerminalWrapper id={`${title}__wrapper`} style={style}> 
 			<TitleBar title={title} id={`${title}__title-bar`}/>
 			<TerminalBrowserWindow id={`${title}__window`}>
 				{children}
