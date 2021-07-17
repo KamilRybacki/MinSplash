@@ -249,7 +249,7 @@ function PhotoView ({console_ref}) {
 					</PhotoMenu>
 				</nav>
 				<PhotoWindow>
-					{ photo_data.urls ? <img src={photo_data.urls.raw}/> : ""}
+					{ photo_data.urls ? <img src={photo_data.urls.raw}/> : "Loading..."}
 				</PhotoWindow>
 			</PhotoViewContentWrapper>
 		</Terminal>
