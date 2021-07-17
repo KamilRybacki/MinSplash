@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 const MY_WEBPAGE_LINK = "https://github.com/KamilRybacki";
 
-const app_body_font = document.querySelector(`html`).style.fontFamily;
-
 const AppFootnoteWrapper = styled.div`
 
   display: flex;
@@ -12,11 +10,12 @@ const AppFootnoteWrapper = styled.div`
 
   position: fixed;
   bottom: 1px;
+  left: 0;
 
   width: 100%;
 
   font-size: 50%;
-  font-family: ${app_body_font};
+  font-family: "Inconsolata"
 
   color: black;
 
@@ -45,6 +44,7 @@ const AppFootnoteWrapper = styled.div`
 `
 
 function AppFooter({title}) {
+
   return (
     <AppFootnoteWrapper>
       <span>{title} </span>

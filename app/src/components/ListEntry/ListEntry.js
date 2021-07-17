@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const CLOSED_FOLDER_SRC = "/images/category_closed.svg"
-const OPEN_FOLDER_SRC = "/images/category_open.svg"
+import CLOSED_FOLDER_SRC from "../../assets/images/category_closed.svg"
+import OPEN_FOLDER_SRC from "../../assets/images/category_open.svg"
 
 const DEFAULT_ICON_PROPS = {
 	

@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, createContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import styled from "styled-components"
 
 import { unsplashFetch } from "../../utils/unsplash_api";
 
@@ -11,6 +10,8 @@ import Terminal from "../Terminal"
 
 import PhotoView from "../PhotoView"
 import ListEntry from "../../components/ListEntry/ListEntry";
+
+import OPEN_FOLDER_SRC from "../../assets/images/category_open.svg"
 
 const fetchCollections = unsplashFetch("collections");
 
@@ -84,29 +85,33 @@ export function MinSplashBrowser() {
 		<MinSplashBrowserWrapper>
 			<Terminal title="Browser" id="main-terminal">
 				<section id="categories-browser">
-					<nav id='categories-list-wrapper'>
-					<div id="categories-title">
-						<span>FETCHED COLLECTIONS - PAGE {collections_page_index}</span>
-						<img src="/images/category_open.svg" alt="Title icon"/>
-					</div>
-					<ul id="categories-list">
-						{collections_page_content ? prepareListEntries(collections_page_content) : []}
-						<li className="view-change-button-enabled" >
-						<button onClick={() => {viewMoreCollections(1)}}> NEXT PAGE </button>
-						</li>
-						<li className={ collections_page_index !== 0 ? "view-change-button-enabled" : "view-change-button-disabled"} >
-						<button onClick={() => {viewMoreCollections(-1)}} > PREV PAGE </button>
-						</li>
-					</ul>
+					<nav id='categories-list-wrapper' style={{
+
+						marginTop: '1rem'
+
+					}}>
+						<div id="categories-title">
+							<span>FETCHED COLLECTIONS - PAGE {collections_page_index}</span>
+							<img src={OPEN_FOLDER_SRC} alt="Title icon"/>
+						</div>
+						<ul id="categories-list">
+							{collections_page_content ? prepareListEntries(collections_page_content) : []}
+							<li className="view-change-button-enabled" >
+							<button onClick={() => {viewMoreCollections(1)}}> NEXT PAGE </button>
+							</li>
+							<li className={ collections_page_index !== 0 ? "view-change-button-enabled" : "view-change-button-disabled"} >
+							<button onClick={() => {viewMoreCollections(-1)}} > PREV PAGE </button>
+							</li>
+						</ul>
 					</nav>
 					<article id="category-preview">
 					<Switch>
 						<Route exact path="/">
 						<h1>Welcome to MinSplash!</h1>
 						</Route>
-						<Route exact path="/:collectionId">
+						<Route path="/:collectionId">
 						{ collection_to_preview ?  
-							<CollectionPreview key={`${collection_to_preview.id}_${Date.now()}`}/> 
+							<CollectionPreview key={`${collection_to_preview.id}`}/> 
 							: 
 							""
 						}

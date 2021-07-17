@@ -20,6 +20,19 @@ import {
 import Terminal from '../Terminal'
 import { unsplashFetch } from '../../utils/unsplash_api'
 
+const button_hover_css = `
+
+	transition: 0.25s ease-in-out;
+
+	&:hover {
+
+		transition: 0.25s ease-in-out;
+		transform: translate(-2px, -2px);
+
+	}
+
+`;
+
 const PhotoViewContentWrapper = styled.article`
 
 	display: grid;
@@ -45,10 +58,12 @@ const PhotoWindow = styled.section`
 
 	margin-left: 1rem;
 
-	& > a > img {
+	& > img {
 
-		height: 30rem;
-		width: auto;
+		max-height: 50vh;
+		max-width: 50vw;
+
+		border: 1px solid white;
 
 	}
 
@@ -82,8 +97,14 @@ const PhotoMenu = styled.div`
 
 		width: 75%;
 
-		& > button > svg {
-			width: 75%;	
+		& > button {
+
+			${button_hover_css}
+
+			& > svg {
+				width: 75%;	
+			}
+
 		}
 
 	}
@@ -94,18 +115,31 @@ const PhotoDescription = styled.section`
 
 	grid-area: desc;
 
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+
 	& > header {
-		font-weight: bolder;
+
+		font-weight: 300;
 		margin-bottom: 2rem;
+
 	}
 
 	& > div {
 
 		margin-bottom: 1rem;
 
+		font-weight: 300;
+
 		& > span {
+
 			margin-right: 0.5rem;
+
+			font-weight: 600;
+
 			text-decoration: underline;
+			
+
 		}
 	}
 
@@ -113,7 +147,7 @@ const PhotoDescription = styled.section`
 
 const ReturnButton = styled.button`
 
-	margin-top: 2rem;
+	margin-top: 1rem;
 
 	background-color: transparent;
 	border: 2px dotted white;
@@ -123,6 +157,30 @@ const ReturnButton = styled.button`
 
 	font-family: "Inconsolata";
 	font-size: 120%;
+
+	cursor: pointer;
+
+	${button_hover_css}
+
+`;
+
+const DownloadButton = styled.a`
+
+	margin-top: 2rem;
+
+	border: 2px dotted white;
+	padding: 0.5rem;
+
+	color: white;
+
+	font-family: "Inconsolata";
+	font-size: 120%;
+	text-decoration: none;
+
+	cursor: pointer;
+
+	${button_hover_css}
+
 `;
 
 const photoview_terminal_style = {
@@ -157,7 +215,7 @@ function PhotoView ({console_ref}) {
 
 		});
 
-		// document.querySelector("#PhotoPreview__wrapper").style.width = document.querySelector("#Browser__wrapper").clientWidth;
+		document.querySelector("#PhotoPreview__wrapper").style.width = document.querySelector("#Browser__wrapper").clientWidth;
 
 	}, [photo_id])
 	
@@ -172,7 +230,7 @@ function PhotoView ({console_ref}) {
 					justifyContent: "center"
 				}}>
 					<PhotoDescription>
-						<div>Description:</div>
+						<div><span>Description:</span></div>
 						<header>{photo_data.description || photo_data.alt_description}</header>
 						<div><span>Views:</span>{photo_data.views}</div>
 						<div><span>Likes:</span>{photo_data.likes}</div>
@@ -186,11 +244,12 @@ function PhotoView ({console_ref}) {
 							<RedditShareButton url={photo_link}><RedditIcon/></RedditShareButton>
 							<PinterestShareButton url={photo_link}><PinterestIcon/></PinterestShareButton>
 						</div>
+						<DownloadButton href={photo_link} download target="_blank">Download picture</DownloadButton>
 						<Link to={`/${collection_id}`}><ReturnButton>Return to collection</ReturnButton></Link>			
 					</PhotoMenu>
 				</nav>
 				<PhotoWindow>
-					{ photo_data.urls ? <a href={photo_data.urls.raw} target="_blank" ><img src={photo_data.urls.raw}/></a> : ""}
+					{ photo_data.urls ? <img src={photo_data.urls.raw}/> : ""}
 				</PhotoWindow>
 			</PhotoViewContentWrapper>
 		</Terminal>

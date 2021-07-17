@@ -1,45 +1,5 @@
 @import '../../theme.scss';
 
-.collection_preview_wrapper {
-    
-    display: flex;
-    flex-direction: column;
-
-    #enter-button {
-
-      width: 90%;
-
-      margin-top: 1rem;
-
-      background: none;
-  
-      cursor: pointer;
-
-      color: $alice-blue;
-
-      font-family: "Inconsolata";
-      font-size: 90%;
-      font-weight: 500;
-      
-      text-align: center;
-
-      margin-left: 5px;
-
-      background-color: lighten($color: $space-cadet, $amount: 20);
-
-      padding: 0.25rem;
-      border: 3px dotted $alice-blue;
-
-      &:hover {
-
-      background-color: lighten($color: $space-cadet, $amount: 40);
-
-      }
-        
-    }
-
-}
-
 ::-webkit-scrollbar {
   width: 2px;
   height: 2px;
