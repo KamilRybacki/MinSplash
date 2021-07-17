@@ -17,7 +17,7 @@ const settings = {
 function MinSplash() {  
 
   window.onbeforeunload = function(e) {
-    location.href = 'https://kamilrybacki.github.io/MinSplash/';
+    window.location.href = 'https://kamilrybacki.github.io/MinSplash/';
   };
 
   return (
