@@ -16,6 +16,10 @@ const settings = {
 
 function MinSplash() {  
 
+  window.onbeforeunload = function(e) {
+    location.href = 'https://kamilrybacki.github.io/MinSplash/';
+  };
+
   return (
     <>
       <div id={settings.title}>
