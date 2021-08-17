@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 const Miniature = styled.article`
 
 	border: 5px solid #FFFFFF;
 
 	position: relative;
-	flex-basis: calc(25% - 10px);
 	margin: 5px;
 	border: 1px solid;
 	box-sizing: border-box;
@@ -42,6 +42,9 @@ const Miniature = styled.article`
 function CollectionMiniature ({photo_data, collection_id, children}){
 
 	const [image_link, setImageLink] = useState("/");
+	const isMobile = useMediaQuery({
+		query: '(max-width: 450px)'
+	})
 
 	useEffect( () => {
 		
@@ -52,7 +55,9 @@ function CollectionMiniature ({photo_data, collection_id, children}){
 	},[])	
 
 	return (
-		<Miniature className='collection_miniature'>
+		<Miniature className='collection_miniature' style={
+			{ flexBasis: isMobile ? 'calc( 50% - 10px )' : 'calc( 25% - 10px )'} 	
+		}>
 			{photo_data.title ? <header><h2>{photo_data.title}</h2></header> : ""} 
 			<Link to={image_link} id="miniature_link"><img src={photo_data.urls.thumb} alt="Miniature photo" id="miniature_img"/></Link>
 			{children ?

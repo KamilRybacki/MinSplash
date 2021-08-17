@@ -11,17 +11,18 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
+
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	box-sizing: border-box;
+
 }
 
 // MinSplash fonts
-
-$root-font-size: 16px;
 
 $main-heading-font-size: 2rem;
 $subheading-font-size: 1.25rem;
@@ -71,4 +72,33 @@ $amaranth-red: rgba(217, 4, 41, 1);
 		  -ms-user-select: none; /* Internet Explorer/Edge */
 			  user-select: none; /* Non-prefixed version, currently
 									supported by Chrome, Edge, Opera and Firefox */
+}
+
+$desktop-root-font-size: 16px;
+$mobile-root-font-size: 12px;
+
+$mobile-switch-width: 450px;
+
+html {
+
+	font-family: $body-font;
+	font-size: $desktop-root-font-size;
+	background-color: $alice-blue;
+
+	display: flex;
+	flex-direction: column;
+
+	justify-content: center;
+	align-items: center;
+
+}
+
+@media screen and (max-width: $mobile-switch-width) { 
+
+	html {
+
+		font-size: $mobile-root-font-size;
+
+	}
+
 }

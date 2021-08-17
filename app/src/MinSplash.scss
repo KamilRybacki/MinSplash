@@ -4,25 +4,9 @@
   box-shadow: 5px 5px 5px $manatee;
 }
 
-html {
-
-  font-family: $body-font;
-  font-size: $root-font-size;
-  background-color: $alice-blue;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-}
-
 #MinSplash {
 
   position: relative;
-
-  width: 100%;
 
   display: grid;
   grid-template-areas: 
@@ -173,10 +157,10 @@ html {
    
     grid-area: viewer;
     
+    margin-left: 0;
+    margin-right: 0;
+    
     #Browser__window {
-
-      grid-template-rows: 80% 20%;
-      grid-template-columns: 30% 70%;
 
       background-color: $space-cadet;
       @include standard_shadow;
@@ -186,6 +170,8 @@ html {
     }
 
     #categories-browser {
+
+      display: grid;
 
       position: relative;
 
@@ -302,119 +288,70 @@ html {
 
           }
 
+        }
+
+        & > #page-buttons{
+
+          margin-top: 1rem;
+          display: flex;
+
+          & > button {
+
+            padding: 5px;
+            text-align: center;
+            margin-left: 5px;
+            margin-right: 5px;
+
+          }
+
           .view-change-button-enabled {
 
-            margin-top: 15px;
+            background: none;
+          
+            cursor: pointer;
 
-            & > button {
+            color: $alice-blue;
 
-              background: none;
+            font-family: "Inconsolata";
+            font-weight: 500;
             
-              cursor: pointer;
+            background-color: lighten($color: $space-cadet, $amount: 20);
 
-              color: $alice-blue;
+            border: 3px dotted $alice-blue;
 
-              font-family: "Inconsolata";
-              font-size: 90%;
-              font-weight: 500;
-              
-              text-align: left;
+            &:hover {
 
-              margin-left: 5px;
-
-              background-color: lighten($color: $space-cadet, $amount: 20);
-
-              padding: 0.25rem;
-              border: 3px dotted $alice-blue;
-
-              &:hover {
-
-                background-color: lighten($color: $space-cadet, $amount: 40);
-
-              }
-              
-            }
-
-            &:before {
-
-              position: absolute;
-              top: 50%;
-              left: -0.75rem;
-              width: 0.5rem;
-              height: 1px;
-              margin: auto;
-              content: '';
-              background-color: $alice-blue;
+              background-color: lighten($color: $space-cadet, $amount: 40);
 
             }
             
-            &:after {
-
-              position: absolute;
-              top: -100%;
-              left: -0.75rem;
-              width: 1px;
-              height: 150%;
-              content: '';
-              background-color: $alice-blue;
-
-            }
           }
-        
+      
           .view-change-button-disabled {
 
-            margin-top: 15px;
+            background: none;
 
-            & > button {
+            color: $alice-blue;
 
-              background: none;
-
-              color: $alice-blue;
-
-              font-family: "Inconsolata";
-              font-size: 90%;
-              font-weight: 500;
-              
-              text-align: left;
-
-              margin-left: 5px;
-
-              background-color: gray;
-
-              padding: 0.25rem;
-              border: 3px dotted $alice-blue;
-
-              cursor: not-allowed;
-              
-            }
-
-            &:before {
-
-              position: absolute;
-              top: 50%;
-              left: -0.75rem;
-              width: 0.5rem;
-              height: 1px;
-              margin: auto;
-              content: '';
-              background-color: $alice-blue;
-
-            }
+            font-family: "Inconsolata";
+            font-weight: 500;
             
-            &:after {
+            background-color: gray;
 
-              position: absolute;
-              top: -100%;
-              left: -0.75rem;
-              width: 1px;
-              height: 150%;
-              content: '';
-              background-color: $alice-blue;
+            border: 3px dotted $alice-blue;
 
-            }
+            cursor: not-allowed;
+              
+
           }
+
         }
+
+
+
       }
+
+      
 
       #category-preview {
 

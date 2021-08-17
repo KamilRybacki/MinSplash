@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useMediaQuery } from "react-responsive";
+
 import styled from "styled-components"
 
 import {
@@ -17,7 +19,6 @@ import {
 	VKIcon
 } from "react-share";
 
-import Terminal from '../Terminal'
 import { unsplashFetch } from '../../utils/unsplash_api'
 
 const button_hover_css = `
@@ -35,14 +36,40 @@ const button_hover_css = `
 
 const PhotoViewContentWrapper = styled.article`
 
-	display: grid;
-	grid-template-areas: 
-	" desc window "
-	" menu window ";	
+	display: flex;
+	flex-direction: column;
 
 	padding: 1rem;
 
-	grid-template-columns: 20rem auto;
+`
+
+const PhotoDescription = styled.section`
+
+	display: flex;
+	justify-content: space-between;
+
+	font-weight: 300;
+
+	margin-bottom: 1rem;
+
+	& > header {
+
+		width: 100%;
+
+		& > span {
+			font-weight: 500;
+		}
+
+	}
+
+	& > section {
+
+		& > span {
+			font-weight: 500;
+		}
+
+	}
+
 
 `
 
@@ -60,9 +87,7 @@ const PhotoWindow = styled.section`
 
 	& > img {
 
-		max-height: 50vh;
-		max-width: 50vw;
-
+		max-width: 100%;
 		border: 1px solid white;
 
 	}
@@ -74,7 +99,6 @@ const PhotoMenu = styled.div`
 	grid-area: menu;
 
 	display: flex;
-
 	flex-direction: column;
 
 	justify-content: center;
@@ -84,89 +108,48 @@ const PhotoMenu = styled.div`
 
 		font-weight: bold;
 
-		margin-bottom: 0.5rem;
-
 	}
 
-	& > div {
+	& > header {
 
 		display: flex;
-		flex-direction: row;
+		align-items: center;
+		justify-content: center;
 
-		justify-content: space-between;
+		& > span {
 
-		width: 75%;
+			margin-right: 1rem;
+
+		}
 
 		& > button {
 
+			width: 2rem;
+			margin-right: 5px;
 			${button_hover_css}
 
 			& > svg {
-				width: 75%;	
+				width: 100%;
 			}
 
 		}
 
 	}
 
-`
+	& > footer {
 
-const PhotoDescription = styled.section`
-
-	grid-area: desc;
-
-	margin-top: 2rem;
-	margin-bottom: 2rem;
-
-	& > header {
-
-		font-weight: 300;
-		margin-bottom: 2rem;
+		display: flex;
+		align-items: center;
 
 	}
 
-	& > div {
-
-		margin-bottom: 1rem;
-
-		font-weight: 300;
-
-		& > span {
-
-			margin-right: 0.5rem;
-
-			font-weight: 600;
-
-			text-decoration: underline;
-			
-
-		}
-	}
-
 `
-
-const ReturnButton = styled.button`
-
-	margin-top: 1rem;
-
-	background-color: transparent;
-	border: 2px dotted white;
-	padding: 0.5rem;
-
-	color: white;
-
-	font-family: "Inconsolata";
-	font-size: 120%;
-
-	cursor: pointer;
-
-	${button_hover_css}
-
-`;
-
 const DownloadButton = styled.a`
 
-	margin-top: 2rem;
+	justify-content: center;
+	align-items: center;
+
+	margin-left: 0.5rem;
 
 	border: 2px dotted white;
 	padding: 0.5rem;
@@ -174,7 +157,6 @@ const DownloadButton = styled.a`
 	color: white;
 
 	font-family: "Inconsolata";
-	font-size: 120%;
 	text-decoration: none;
 
 	cursor: pointer;
@@ -183,18 +165,25 @@ const DownloadButton = styled.a`
 
 `;
 
-const photoview_terminal_style = {
+const ReturnButton = styled.button`
 
-	position: 'fixed',
+	display: flex;
 
-	height: "75%",
+	background-color: transparent;
+	border: none;
+	padding: 0.5rem;
 
-	zIndex: "999",
+	color: white;
 
-	left: `10%`,
-	top: `15%`,
+	font-family: "Inconsolata";
+	text-dectoration: none;
 
-}
+	cursor: pointer;
+
+	${button_hover_css}
+
+`;
+
 
 function PhotoView ({console_ref}) {
 
@@ -203,6 +192,10 @@ function PhotoView ({console_ref}) {
 
 	const collection_id = useParams()["collectionId"];
 	const photo_id = useParams()["photoId"];
+
+	const isMobile = useMediaQuery({
+		query: '(max-width: 450px)'
+	})
 
 	useEffect( () => {
 
@@ -215,44 +208,45 @@ function PhotoView ({console_ref}) {
 
 		});
 
-		document.querySelector("#PhotoPreview__wrapper").style.width = document.querySelector("#Browser__wrapper").clientWidth;
-
 	}, [photo_id])
 	
 	return(
-		<Terminal title="PhotoPreview" style={photoview_terminal_style}>
-			<PhotoViewContentWrapper>
-				<nav style={{
-					display: "flex",
-					flexDirection: "column",
+		<PhotoViewContentWrapper>
+			<nav style={{
+				display: "flex",
+				flexDirection: "column",
 
-					alignItems: "center",
-					justifyContent: "center"
-				}}>
-					<PhotoDescription>
-						<div><span>Description:</span></div>
-						<header>{photo_data.description || photo_data.alt_description}</header>
-						<div><span>Views:</span>{photo_data.views}</div>
-						<div><span>Likes:</span>{photo_data.likes}</div>
-					</PhotoDescription>
-					<PhotoMenu>
-						<span>Share this photo</span>
-						<div>
-							<FacebookShareButton url={photo_link}><FacebookIcon/></FacebookShareButton>
-							<VKShareButton url={photo_link}><VKIcon/></VKShareButton>
-							<TwitterShareButton url={photo_link}><TwitterIcon/></TwitterShareButton>
-							<RedditShareButton url={photo_link}><RedditIcon/></RedditShareButton>
-							<PinterestShareButton url={photo_link}><PinterestIcon/></PinterestShareButton>
-						</div>
-						<DownloadButton href={photo_link} download target="_blank">Download picture</DownloadButton>
-						<Link to={`/${collection_id}`}><ReturnButton>Return to collection</ReturnButton></Link>			
-					</PhotoMenu>
-				</nav>
+				justifyContent: "center"
+			}}>
+				<PhotoDescription>
+					<header>
+						<span>Description:</span>
+						<p>{photo_data.description || photo_data.alt_description}</p>
+					</header>
+					<section>
+						<span>Views:</span>{photo_data.views}<br/>
+						<span>Likes:</span>{photo_data.likes}
+					</section>
+				</PhotoDescription>
 				<PhotoWindow>
 					{ photo_data.urls ? <img src={photo_data.urls.raw}/> : "Loading..."}
 				</PhotoWindow>
-			</PhotoViewContentWrapper>
-		</Terminal>
+				<PhotoMenu>
+					<header>
+						<span>Share via:</span>
+						<FacebookShareButton url={photo_link}><FacebookIcon/></FacebookShareButton>
+						<VKShareButton url={photo_link}><VKIcon/></VKShareButton>
+						<TwitterShareButton url={photo_link}><TwitterIcon/></TwitterShareButton>
+						<RedditShareButton url={photo_link}><RedditIcon/></RedditShareButton>
+						<PinterestShareButton url={photo_link}><PinterestIcon/></PinterestShareButton>
+					</header>
+					<footer>
+						<Link to={`/${collection_id}`} style={{ textDecoration: 'none' }}><ReturnButton>Return to collection</ReturnButton></Link>
+						<DownloadButton href={photo_link} download target="_blank">Download picture</DownloadButton>
+					</footer>
+				</PhotoMenu>
+			</nav>
+		</PhotoViewContentWrapper>
 	)
 }
 

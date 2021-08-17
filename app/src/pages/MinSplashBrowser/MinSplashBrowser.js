@@ -8,7 +8,6 @@ import CollectionPreview from "../CollectionPreview"
 import PseudoConsole from "../../components/PseudoConsole"
 import Terminal from "../Terminal"
 
-import PhotoView from "../PhotoView"
 import ListEntry from "../../components/ListEntry/ListEntry";
 
 import OPEN_FOLDER_SRC from "../../assets/images/category_open.svg"
@@ -91,18 +90,16 @@ export function MinSplashBrowser() {
 
 					}}>
 						<div id="categories-title">
-							<span>FETCHED COLLECTIONS - PAGE {collections_page_index}</span>
+							<span>COLLECTIONS PAGE {collections_page_index}</span>
 							<img src={OPEN_FOLDER_SRC} alt="Title icon"/>
 						</div>
 						<ul id="categories-list">
 							{collections_page_content ? prepareListEntries(collections_page_content) : []}
-							<li className="view-change-button-enabled" >
-							<button onClick={() => {viewMoreCollections(1)}}> NEXT PAGE </button>
-							</li>
-							<li className={ collections_page_index !== 0 ? "view-change-button-enabled" : "view-change-button-disabled"} >
-							<button onClick={() => {viewMoreCollections(-1)}} > PREV PAGE </button>
-							</li>
 						</ul>
+						<div id="page-buttons">
+							<button onClick={() => {viewMoreCollections(-1)}} className={ collections_page_index !== 0 ? "view-change-button-enabled" : "view-change-button-disabled"}>PREV</button>
+							<button onClick={() => {viewMoreCollections(1)}} className="view-change-button-enabled">NEXT</button>
+						</div>
 					</nav>
 					<article id="category-preview">
 					<Switch>
@@ -121,9 +118,6 @@ export function MinSplashBrowser() {
 				</section>
 				<PseudoConsole id="command-line" ref={console_ref}/>
 			</Terminal>
-			<Route path="/:collectionId/:photoId">
-				<PhotoView console_ref={console_ref}/>
-			</Route>
 		</MinSplashBrowserWrapper>
 	)
 }

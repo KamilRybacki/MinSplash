@@ -25,16 +25,20 @@ const TitleBarWrapper = styled.div`
 
 const TitleBarButtonWrapper = styled.div`
 
+	height: 100%;
+	width: 50px;
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
-	width: 50px;
-
 	& > button {
 
-		width: 0.5rem;
+		display: inline-block;
+		padding: 0;
+
 		height: 0.75rem;
+		width: 0.75rem;
 
 		background: none;
 		border: none;

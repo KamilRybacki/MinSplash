@@ -1,11 +1,13 @@
 import './CollectionPreview.scss'
 import { useEffect, useState, useContext } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import styled from "styled-components"
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { unsplashFetch } from '../../utils/unsplash_api';
 
+import PhotoView from "../PhotoView"
 import CollectionMiniature from '../../components/CollectionMiniature';
 import CollectionDescription from '../../components/CollectionDescription';
 
@@ -33,8 +35,6 @@ const SortingWrapper = styled.div`
 	position: relative;
 
 	padding: 0.5rem;
-
-	width: 50%;
 
 	& > button {
 
@@ -161,53 +161,62 @@ function CollectionPreview() {
 	}
 
 	return (
-		<CollectionPreviewWrapper>
-			<CollectionDescription key={collection_id}/> 
-			<SortingWrapper>
-				<span>Sorting type: </span>
-				<button onClick={ () => { sortCollection("likes") } }>By likes</button>
-				<button onClick={ () => { sortCollection("created_at") } } style={{
+		<Router>
+			<Switch>
+				<Route exact path={`/${collection_id}`}>
+					<CollectionPreviewWrapper>
+						<CollectionDescription key={collection_id}/> 
+						<SortingWrapper>
+							<span>Sorting type: </span>
+							<button onClick={ () => { sortCollection("likes") } }>By likes</button>
+							<button onClick={ () => { sortCollection("created_at") } } style={{
 
-					marginLeft: '5px'
+								marginLeft: '5px'
 
-				}}>By date</button>
-			</SortingWrapper>
-			<InfiniteScroll
-				id="infinite-collection"
-				dataLength={collection_photos.length} 
-				next={ () => { 
-					fetchCollectionPhotos();
-				}}
-				hasMore={ true }
-				scrollableTarget="infinite-collection-view"
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
+							}}>By date</button>
+						</SortingWrapper>
+						<InfiniteScroll
+							id="infinite-collection"
+							dataLength={collection_photos.length} 
+							next={ () => { 
+								fetchCollectionPhotos();
+							}}
+							hasMore={ true }
+							scrollableTarget="infinite-collection-view"
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
 
-					justifyContent: 'center',
-					alignItems: 'center'
-				}}>
-				<section style={{
+								justifyContent: 'center',
+								alignItems: 'center'
+							}}>
+							<section style={{
 
-					width: `100%`,
-					display: `flex`,
-					flexWrap: `wrap`,
+								width: `100%`,
+								display: `flex`,
+								flexWrap: `wrap`,
 
-					height: `${infinite_scroll_height}px`,
+								height: `${infinite_scroll_height}px`,
 
-					overflowY: 'scroll', 
-					overflowX: 'none'
+								overflowY: 'scroll', 
+								overflowX: 'none'
 
-				}} id="infinite-collection-view">
-					{collection_photos || "Loading..."}
-				</section>	
-				<EnterButton 
-					onClick={ () => { fetchCollectionPhotos() } } 
-					id="enter-button">
-						ENTER COLLECTION
-				</EnterButton>
-			</InfiniteScroll>
-		</CollectionPreviewWrapper>
+							}} id="infinite-collection-view">
+								{collection_photos || "Loading..."}
+							</section>	
+							<EnterButton 
+								onClick={ () => { fetchCollectionPhotos() } } 
+								id="enter-button">
+									ENTER COLLECTION
+							</EnterButton>
+						</InfiniteScroll>
+					</CollectionPreviewWrapper>
+				</Route>
+				<Route path="/:collectionId/:photoId">
+					<PhotoView console_ref={console_ref}/>
+				</Route>
+			</Switch>
+		</Router>
 	);
 }
 
